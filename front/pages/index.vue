@@ -57,10 +57,20 @@ export default {
   },
   computed: {
     unfinishedTodos() {
-      return this.todos.filter(t => !t.done);
+      if (this.todos) {
+        return this.todos.filter(t => !t.done);
+      }
+      else {
+        return [];
+      }
     },
     finishedTodos() {
-      return this.todos.filter(t => t.done);
+      if (this.todos) {
+        return this.todos.filter(t => t.done);
+      }
+      else {
+        return [];
+      }
     }
   },
   methods: {
