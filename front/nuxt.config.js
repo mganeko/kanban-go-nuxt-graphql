@@ -1,4 +1,9 @@
 
+const env = process.env
+const GRAHPQL_HOST = env.GRAHPQL_HOST ? env.GRAHPQL_HOST : "localhost";
+const GRAPHQL_PORT = env.GRAPHQL_PORT ? env.GRAPHQL_PORT : "8080";
+
+
 export default {
   mode: 'universal',
   /*
@@ -45,8 +50,8 @@ export default {
     clientConfigs: {
       default: {
         // GraphQLサーバーのエンドポイント
-        httpEndpoint: 'http://server:8080/query',
-        browserHttpEndpoint: 'http://localhost:8080/query'
+        httpEndpoint: 'http://' + GRAHPQL_HOST + ':' + GRAPHQL_PORT + '/query',
+        browserHttpEndpoint: 'http://' + GRAHPQL_HOST + ':' + GRAPHQL_PORT + '/query'
       }
     },
   },
@@ -57,7 +62,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }
