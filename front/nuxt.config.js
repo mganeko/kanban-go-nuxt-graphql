@@ -2,7 +2,9 @@
 const env = process.env
 const GRAHPQL_HOST = env.GRAHPQL_HOST ? env.GRAHPQL_HOST : "localhost";
 const GRAPHQL_PORT = env.GRAPHQL_PORT ? env.GRAPHQL_PORT : "8080";
+const FRONT_PORT = env.FRONT_PORT ? env.FRONT_PORT : "3000";
 
+console.log("GRAHPQL_HOST=" + GRAHPQL_HOST + ", GRAPHQL_PORT=" + GRAPHQL_PORT + ", FRONT_PORT=" + FRONT_PORT);
 
 export default {
   mode: 'universal',
@@ -64,5 +66,10 @@ export default {
     */
     extend(config, ctx) {
     }
+  },
+
+  server: {
+    port: FRONT_PORT, // デフォルト: 3000
+    host: '0.0.0.0' // デフォルト: localhost
   }
 }

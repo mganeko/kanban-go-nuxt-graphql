@@ -16,11 +16,5 @@
     "core-js": "2.6.9",
     "nuxt": "^2.0.0"
   },
-  "devDependencies": {},
-  "config": {
-    "nuxt": {
-      "host": "0.0.0.0",
-      "port": "3000"
-    }
-  }
+  "devDependencies": {}
 }
