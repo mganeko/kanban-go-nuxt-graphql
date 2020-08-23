@@ -21,12 +21,18 @@ const dataSource = "localuser:localpass@tcp(db:3306)/localdb?charset=utf8&parseT
 const defaultPort = "8080"
 
 func main() {
-	port := os.Getenv("PORT")
+	port := os.Getenv("GRAPHQL_PORT")
 	if port == "" {
 		port = defaultPort
 	}
+	host := os.Getenv("GRAHPQL_HOST")
+	if host == "" {
+		host = "localhost"
+	}
 
-	db, err := gorm.Open("mysql", dataSource)
+	//db, err := gorm.Open("mysql", dataSource)
+	dbSource := getDbSource()
+	db, err := gorm.Open("mysql", dbSource)
 	if err != nil {
 		panic(err)
 	}
@@ -64,6 +70,44 @@ func main() {
 	router.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	router.Handle("/query", srv)
 
-	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
+	//log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
+	log.Printf("connect to http://%s:%s/ for GraphQL playground", host, port)
+
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
+
+func getDbSource() string {
+	// --- get env ---
+	DB_USER := os.Getenv("DB_USER")
+	DB_PASSWORD := os.Getenv("DB_PASSWORD")
+	DB_NAME := os.Getenv("DB_NAME")
+	DB_HOST := os.Getenv("DB_HOST")
+	DB_PORT := os.Getenv("DB_PORT")
+	if ( (DB_USER == "") || (DB_PASSWORD == "") || (DB_NAME == "") || (DB_HOST == "") || (DB_PORT == "") ) {
+		return dataSource
+	}
+
+	var source string  =  DB_USER + ":" + DB_PASSWORD + "@tcp(" + DB_HOST + ":" + DB_PORT + ")/" + DB_NAME + "?charset=utf8&parseTime=True&loc=Local"
+	log.Printf("db soruce*", source)
+	return source
+}
+
+/*--- GraphQL example for playground ---
+
+# Write your query or mutation here
+query allUser {
+  users {
+    id
+    name
+  }
+}
+
+query allTodos {
+  todos {
+    id
+    text
+    userId
+  }
+}
+
+---*/
