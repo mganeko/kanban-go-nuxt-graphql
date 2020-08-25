@@ -71,5 +71,6 @@ export default {
   server: {
     port: FRONT_PORT, // デフォルト: 3000
     host: '0.0.0.0' // デフォルト: localhost
-  }
+  },
+  telemetry: false // Are you interested in participation? の質問を回避
 }
