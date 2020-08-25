@@ -2,7 +2,7 @@
 
 # -- build server --
 cd server
-go build server.go
+go build -o kanbanserver server.go
 cd ..
 
 

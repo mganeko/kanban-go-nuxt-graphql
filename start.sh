@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # --- sever ---
-server/server &
+server/kanbanserver &
 
 # --- front --
 cd front
