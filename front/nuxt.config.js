@@ -2,16 +2,30 @@
 const env = process.env
 const GRAHPQL_HOST = env.GRAHPQL_HOST ? env.GRAHPQL_HOST : "localhost";
 const GRAPHQL_PORT = env.GRAPHQL_PORT ? env.GRAPHQL_PORT : "8080";
-const FRONT_PORT = env.FRONT_PORT ? env.FRONT_PORT : "3000";
+const GRAPHQL_BROWSER_URL = env.GRAPHQL_BROWSER_URL ? env.GRAPHQL_BROWSER_URL : "http://" + GRAHPQL_HOST + ":" + GRAPHQL_PORT;
 
-console.log("GRAHPQL_HOST=" + GRAHPQL_HOST + ", GRAPHQL_PORT=" + GRAPHQL_PORT + ", FRONT_PORT=" + FRONT_PORT);
+const FRONT_PORT = env.FRONT_PORT ? env.FRONT_PORT : "3000";
+const FRONT_BASE = env.FRONT_BASE ? env.FRONT_BASE : "/";
+
+console.log("GRAHPQL_HOST=" + GRAHPQL_HOST + ", GRAPHQL_PORT=" + GRAPHQL_PORT + ", GRAPHQL_BROWSER_URL=" + GRAPHQL_BROWSER_URL);
+console.log("FRONT_PORT=" + FRONT_PORT + ", FRONT_BASE=" + FRONT_BASE);
 
 export default {
   mode: 'universal',
+  // add for sub directory
+  router: {
+    base: FRONT_BASE
+  },
+
   /*
   ** Headers of the page
   */
   head: {
+    // add for sub directory
+    base: {
+      href: 'router.base'
+    },
+
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -19,7 +33,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: FRONT_BASE + 'favicon.ico' }
     ]
   },
   /*
@@ -53,7 +67,7 @@ export default {
       default: {
         // GraphQLサーバーのエンドポイント
         httpEndpoint: 'http://' + GRAHPQL_HOST + ':' + GRAPHQL_PORT + '/query',
-        browserHttpEndpoint: 'http://' + GRAHPQL_HOST + ':' + GRAPHQL_PORT + '/query'
+        browserHttpEndpoint: GRAPHQL_BROWSER_URL + '/query'
       }
     },
   },
