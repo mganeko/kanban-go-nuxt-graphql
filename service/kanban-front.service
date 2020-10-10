@@ -1,0 +1,16 @@
+[Unit]
+Description=kanban-front
+After=network.target kanbanserver.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/kanban-env
+WorkingDirectory=/root/kanban/front/
+ExecStart=/usr/bin/node /root/kanban/front/node_modules/.bin/nuxt start
+ExecStop=pkill -f nuxt
+User=root
+KillMode=none
+Restart = always
+
+[Install]
+WantedBy=multi-user.target

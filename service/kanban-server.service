@@ -1,0 +1,16 @@
+[Unit]
+Description=kanban-server
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/kanban-env
+WorkingDirectory=/root/kanban/
+ExecStart=/root/kanban/server/kanbanserver
+ExecStop=pkill -f kanbanserver
+User=root
+KillMode=none
+Restart = always
+
+[Install]
+WantedBy=multi-user.target kanbanfront.service
