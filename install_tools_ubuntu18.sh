@@ -1,5 +1,5 @@
 #!/bin/sh
-# install toosl on Ubuntu 18.04
+# install tools on Ubuntu 18.04
 
 apt update
 apt install -y mysql-client
