@@ -11,6 +11,7 @@ apt install -y npm
 # node.js must be installed
 cd front
 npm install
+npm audit fix
 cd ..
 
 # env
