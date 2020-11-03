@@ -13,5 +13,5 @@ sleep 1
 ps -ef | grep kanban
 
 echo ""
-echo "Plase exec stop_kanban.sh for stop service"
+echo "Plase exec stop_kanban_service.sh for stop service"
 

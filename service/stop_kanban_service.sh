@@ -13,5 +13,5 @@ sleep 1
 ps -ef | grep kanban
 
 echo ""
-echo "Plase exec start_kanban.sh for start service"
+echo "Plase exec start_kanban_service.sh for start service"
 
