@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # --- sever ---
-server/kanbanserver &
+nohup server/kanbanserver &
 
 # --- front --
 cd front
-npm start &
+nohup npm start &
 
